@@ -4,6 +4,10 @@ AI-powered React component generator with live preview.
 
 ## Prerequisites
 
+**With Docker:**
+- Docker
+
+**Without Docker:**
 - Node.js 18+
 - npm
 
@@ -31,7 +35,41 @@ This command will:
 
 ## Running the Application
 
-### Development
+### With Docker (recommended)
+
+1. Build the image:
+
+```bash
+docker build -t uigen .
+```
+
+2. Run the container:
+
+```bash
+docker run -d --name uigen -p 3000:3000 --env-file .env uigen
+```
+
+Open [http://localhost:3000](http://localhost:3000)
+
+> **Note:** The SQLite database lives inside the container and is reset when the container is removed. To persist data across rebuilds, mount a volume:
+> ```bash
+> docker run -d --name uigen -p 3000:3000 --env-file .env -v $(pwd)/prisma:/app/prisma uigen
+> ```
+
+**Other Docker commands:**
+
+```bash
+# View logs
+docker logs uigen -f
+
+# Restart after .env changes
+docker restart uigen
+
+# Stop and remove
+docker stop uigen && docker rm uigen
+```
+
+### Without Docker (local dev)
 
 ```bash
 npm run dev
